@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { getArticles } from "@/services/api";
 
 export default function Home() {
   const [articles, setArticles] = useState<any[]>([]);
@@ -8,8 +9,7 @@ export default function Home() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/articles")
-      .then((res) => res.json())
+    getArticles()
       .then((data) => {
         setArticles(data);
         setLoading(false);

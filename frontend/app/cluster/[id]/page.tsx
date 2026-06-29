@@ -1,14 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { getClusterDetails } from "@/services/api";
 
 export default function ClusterPage({ params }: any) {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/clusters/${params.id}`)
-      .then((res) => res.json())
-      .then((data) => setArticles(data));
+    getClusterDetails(params.id)
+      .then((data) => setArticles(data))
+      .catch((err) => console.error(err));
   }, [params.id]);
 
   return (
